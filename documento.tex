@@ -1,0 +1,176 @@
+
+% !TeX root = documento.tex
+% !TeX spellcheck = pt_BR
+
+
+\documentclass{uecetex}
+
+\usepackage[utf8]{inputenc}                         % Acentuação direta
+\usepackage[T1]{fontenc}                            % Codificação da fonte em 8 bits
+\usepackage{blindtext}
+\usepackage[showframe,pass]{geometry}
+
+\begin{document}
+	
+	\imprimirlistadefiguras
+	\imprimirlistadetabelas
+	\imprimirlistadequadros
+	
+	
+	\chapter{Teste}	\lipsum[1]	
+	\section{Teste}	\lipsum[1]
+	\subsection{Teste}	\lipsum[1]
+	\subsubsection{Teste}	\lipsum[1]
+	\subsubsubsection{Teste}	\lipsum[1]
+	
+	\blindtext
+	\subsection{Alíneas e Subalíneas}
+	
+	Proin pretium imperdiet augue non efficitur. Nam non velit tortor. Nullam ultricies mollis orci in feugiat.	
+	
+	\begin{alineas}
+		\item quisque mollis nec enim ac fringilla. Nam quis dolor ut velit sodales ultricies.
+		\item lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu.
+		\begin{subalineas}
+			\item suspendisse bibendum ultrices porta. Sed diam mauris, aliquam
+			\item donec dignissim porttitor nisl a iaculis. Morbi elementum lorem eu cursus vehicula.
+		\end{subalineas}
+		\item duis lacinia lacus a varius aliquam. 
+	\end{alineas}
+	
+	\subsection{Equações}
+
+	Curabitur ante ante, fringilla sit amet imperdiet quis, vehicula sit amet dui. Phasellus faucibus vitae orci non interdum. Vivamus commodo eros at commodo tempus.
+
+	\begin{equation}
+		f(n) = n^5 + 4n^2 + 2 |_{n=17}
+	\end{equation}
+	
+	In efficitur, felis id placerat sodales, mauris ex elementum neque, vel euismod tortor erat vel libero. Nulla consectetur est sed magna elementum, id condimentum purus gravida. 
+	
+	\chapter{Teste}
+	\section{Teste}	\lipsum[1]
+	
+	\subsection{Ilustrações}
+	
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit enim, luctus quis augue a, sodales rutrum dolor. Nam auctor vel ex maximus placerat. Maecenas pulvinar turpis sed nunc sollicitudin, ac interdum lorem pretium. Praesent consequat ipsum ac orci facilisis, vitae scelerisque ipsum blandit.
+	
+	\subsubsection{Figuras}
+	
+	\begin{figure}[h!]
+		\centering
+		\caption{\label{fig:example-1} Ut posuere, ex quis sagittis auctor, magna massa euismod felis}	
+		\IBGEtab{}{
+			\includegraphics[width=6cm]{example-image-a}
+		}{
+			\fonte{Elaborado pelo autor.}
+			\nota{Elaborado pelo autor.}
+		}	
+	\end{figure}
+
+	Maecenas sit amet facilisis mauris. Mauris elit mauris, dignissim non sollicitudin non, sodales vitae ipsum. Sed et neque non metus feugiat cursus.
+
+	\subsubsection{Gráficos}
+	
+	Praesent non sollicitudin nisi. Proin bibendum eros quis erat sollicitudin, nec malesuada lacus congue. Sed vel pellentesque felis. Etiam mattis ligula sed augue facilisis mollis.
+	
+	
+	
+	Nunc gravida mattis luctus. Suspendisse vehicula metus nec aliquam suscipit. Quisque elementum neque fermentum mi tempor, ac aliquam tortor aliquam.
+	
+	\subsubsection{Fluxograma}
+	
+	Vivamus accumsan fringilla enim, eget ultrices eros aliquet sed. Donec sollicitudin leo tempus turpis placerat, at iaculis sem ultricies. Nulla eget magna diam. Fusce et est felis. Quisque a mi a odio facilisis varius eget facilisis elit. Maecenas aliquet leo id metus posuere tincidunt.
+	
+	
+
+	Curabitur vel libero ut felis congue fringilla. Praesent eu tempor enim. Suspendisse odio lectus, condimentum sit amet auctor vitae, hendrerit et ex.
+
+	\subsubsection{Desenho}
+	
+	Donec ac purus tortor. Maecenas ornare lacus a nisl laoreet vestibulum. Sed ante orci, elementum vitae interdum et, pellentesque eget neque.
+	
+	
+	
+	Nulla fermentum augue urna, eget egestas mauris posuere at. Etiam eu scelerisque orci, lobortis aliquam metus. Nulla facilisi. In hac habitasse platea dictumst. 
+	
+	
+
+	\blindtext
+	
+	\begin{figura}[h!]
+		\centering
+		\caption{\label{des:example-1} Ut posuere, ex quis sagittis}	
+		\IBGEtab{}{
+			\includegraphics[width=5cm]{example-image-a}
+		}{
+			\fonte{Elaborado pelo autor.}
+		}	
+	\end{figura}
+
+\blindtext
+
+\begin{figura}[h!]
+	\centering
+	\caption{\label{des:example-1} Ut posuere, ex quis sagittis}	
+	\IBGEtab{}{
+		\includegraphics[width=5cm]{example-image-a}
+	}{
+		\fonte{Elaborado pelo autor.}
+	}	
+\end{figura}
+
+\blindtext
+
+\section{Tabelas}
+
+\blindtext
+
+\begin{table}[h!]
+	\renewcommand{\arraystretch}{1.8}	
+	\centering
+	\caption{\label{tab:exemplo-1} Modelo de Tabela}		
+	\IBGEtab{}{
+		\begin{tabular}{lcccc}
+			\toprule
+			\textbf{Áreas} & \textbf{UNESP} & \textbf{UNICAMP} & \textbf{USP} & \textbf{Total} \\
+			\midrule
+			Interdisciplinar & 2 & 2 & 2 & 6 \\
+			Biológicas e da Saúde & 2 & 2 & 2 & 6 \\
+			Exatas e Tecnológicas & 2 & 2 & 2 & 6 \\
+			Humanas e Artes & 2 & 2 & 2 & 6 \\
+			\midrule
+			Total & 8 & 8 & 8 & 24 \\
+			\bottomrule
+		\end{tabular}
+	}{
+		\fonte{Elaborado pelo autor}
+	}
+\end{table}
+
+Biblioteca Eletrônica A biblioteca eletrônica é o termo que se refere ao sistema no qual os processos básicos da biblioteca são de natureza eletrônica, o que implica ampla utilização de computadores e de suas facilidade
+
+\begin{quadro}[h!]	
+	\centering
+	\renewcommand{\arraystretch}{1.8}
+	\caption{\label{tab:exemplo-1}  Definições e Características da Biblioteca Eletrônica, Digital e Virtual}		
+	\IBGEtab{}{
+		\begin{tabular}{|c|p{10cm}|}
+			\hline
+			\textbf{Título da Biblioteca} & \textbf{Definição e Característica}  \\
+			\hline
+			Biblioteca Eletrônica & A biblioteca eletrônica é o termo que se refere ao sistema no qual os processos básicos da biblioteca são de natureza eletrônica, o que implica ampla utilização de computadores e de suas facilidades na construção de índices on-line, busca de textos completos e na recuperação e armazenagem de registros. A biblioteca eletrônica se direcionará para ampliar o uso de computadores  na armazenagem, recuperação e disponibilidade de informação, podendo envolver-se em projetos para a digitalização de livros.\\
+			\hline
+			Biblioteca Digital & A informação que ela contém 	existe apenas na forma digital, podendo	residir em meios diferentes de armazenagem, como as memórias eletrônicas (discos magnéticos e óticos). Desta 	forma, a biblioteca digital não contém livros na forma convencional e a informação pode ser acessada, em locais específicos e remotamente, por meio de redes de computadores.\\
+			\hline
+		\end{tabular}
+	}{
+		\fonte{Elaborado pelo autor}
+	}
+\end{quadro}
+
+\blindlist{alineas}[3]
+
+
+
+\end{document}
