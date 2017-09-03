@@ -4,7 +4,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{uecetex}[2.0]
+\ProvidesClass{uecetex2}[2.0]
 
 % Repassa demais opcoes para o abntex
 
@@ -41,6 +41,7 @@
 \newcommand{\imagemname}{Imagem}
 \newcommand{\fotoname}{Foto}
 \newcommand{\quadroname}{Quadro}
+\newcommand{\anotacaoname}{Anota\c{c}\~{a}o}
 
 \newcommand{\ilustracaolistname}{Lista de Ilustra\c{c}\~oes}
 \newcommand{\desenholistname}{Lista de Desenhos}
@@ -64,6 +65,11 @@
 \RequirePackage{mathptmx} % Define Times New Roman como fonte padrão do documento
 \RequirePackage{mwe}      % Prover varias imagens como exemplo
 \RequirePackage{caption}  % Altera os captions de figuras, gráficos, tabelas, etc.
+\RequirePackage[portuguese,ruled,lined]{algorithm2e}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Formatações Básicas         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Define o espaço entre linhas para 1.5 cm
 %\OnehalfSpacing	Bug no ABNTEX2?
@@ -77,7 +83,6 @@
 % Define a distância da margem esquerda do parágrafo
 \setlength{\parindent}{2cm}
 
-
 % Distance between floats on the top or the bottom and the text;
 \setlength{\textfloatsep}{18pt plus 2pt minus 2pt}
 
@@ -86,6 +91,19 @@
 
 \hypersetup{%
 	pdfborder = {0 0 0}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Configuração do PDF         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\AtBeginDocument{ %
+	% Adiciona os metadados do documento gerado
+	\hypersetup{ %
+		pdftitle={\imprimirtitulo},%
+		pdfauthor={\imprimirautor}, %
+		pdfsubject={Powered by ueceTeX2 - Acesse https://github.com/thiagodnf/uecetex2} %
+	}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -148,15 +166,26 @@
 
 \captionsetup{
 	justification=centering,% Centraliza o caption
-	belowskip=0.3cm,
-	%belowskip=\onelineskip,
+	skip=0pt,                %Retira o espaco entre a figura/tabela e o caption
 	labelfont=bf, % A palavra 'Figure 1' agora eh negrito
 	font=bf	% O texto depois de 'Figure 1' agora eh negrito
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                 Fontes              %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Caption}[1]{ %
+	\begin{Spacing}{1.5} %
+		\caption{#1} %
+	\end{Spacing} %
+}
+
+\newcommand{\Fonte}[2][\fontename]{ %
+	\vspace{8pt}
+	\fonte[\normalfont{#1}]{\normalfont{#2}}
+	\vspace{-5pt}
+}
+
+% Cria o comando para fazer notas e anotacoes na figura e na tabela
+\newcommand{\Nota}[2][\notaname]{\Fonte[#1]{#2}} 
+\newcommand{\Anotacao}[2][\anotacaoname]{\Fonte[#1]{#2}} 
 
 % Define o comando \fonte que respeita as configurações de caption do memoir ou do caption
 \makeatletter
@@ -167,14 +196,15 @@
 	\begingroup
 	\@parboxrestore
 	\if@minipage
-		\@setminipage
+	\@setminipage
 	\fi
 	\ABNTEXfontereduzida
-	\vspace{0.1cm}
+	%\configureseparator
 	\captiondelim{\ABNTEXcaptionfontedelim}
-	\ABNTEXfontereduzida #1\ABNTEXcaptionfontedelim \ignorespaces\ABNTEXfontereduzida #2\par
+	{\ABNTEXfontereduzida #1\ABNTEXcaptionfontedelim}{\ignorespaces\ABNTEXfontereduzida #2}\par
 	\endgroup}
 \makeatother
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%       	    Ilustrações            %%
@@ -245,3 +275,132 @@
 
 % Os items da lista de tabela e quadro agora sao negritos
 \renewcommand{\cfttablefont}{\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%       	      Sumário              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\contentsname}{}
+
+\newcommand{\imprimirsumario}{ %
+	\pdfbookmark[0]{Sumário}{toc}
+	\tableofcontents*
+	\cleardoublepage
+}
+
+% Modifica o espaçamento no sumário
+% Nao ha espacos
+\setlength{\cftbeforeparagraphskip}{0pt}
+\setlength{\cftbeforesubsectionskip}{0pt}
+\setlength{\cftbeforesectionskip}{0pt}
+\setlength{\cftbeforesubsubsectionskip}{0pt}
+\setlength{\cftbeforechapterskip}{0pt}
+
+%\renewcommand\cftchapterfont{\normalsize}
+\renewcommand\cftsectionfont{\normalsize\normalfont}
+\renewcommand\cftsubsectionfont{\normalsize}
+\renewcommand\cftsubsubsectionfont{\normalsize\normalfont}
+% Altera a fonte da seção quinária
+\renewcommand*{\cftparagraphfont}{\normalsize\normalfont\itshape}
+
+% Páginas do sumário não podem ser negrito.
+\renewcommand\cftchapterpagefont{\normalfont}
+\renewcommand\cftsectionpagefont{\normalfont}
+\renewcommand\cftsubsectionpagefont{\normalfont}
+% Altera a fonte da seção quinária
+\renewcommand\cftparagraphpagefont{\normalfont}
+
+% Secao Secundaria (Section): Caixa alta, Não Negrito, tamanho 12
+\makeatletter
+\let\oldcontentsline\contentsline
+\def\contentsline#1#2{%
+	\expandafter\ifx\csname l@#1\endcsname\l@section %
+		\expandafter\@firstoftwo %
+	\else %
+		\expandafter\@secondoftwo %
+	\fi %
+	{%
+		\oldcontentsline{#1}{\MakeTextUppercase{#2}}%
+	}{%
+		\oldcontentsline{#1}{#2}%
+	}%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%             Teoremas                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Lg}{\emph{\sc L}}
+\newcommand{\contem}{\supset}
+\newcommand{\estacontido}{\subset}
+\newtheorem{afirmacao}{{\sc Afirma\c{c}\~{a}o}}[section]
+\newtheorem{argumento}{\sc Argumento~}[section]
+\newtheorem{teo}{Teorema}[section]
+\newtheorem{lema}{Lema}[section]
+\newtheorem{cor}{Corol\'ario}[section]
+\newtheorem{prop}[teo]{Proposi\c{c}\~ao}
+\newtheorem{conjec}{Conjectura}[section]
+\newtheorem{premissa}{Premissa}[chapter]
+\newtheorem{procedimento}{Procedimentos}[section]
+\newtheorem{heuristica}{Heur\'istica}[section]
+\newtheorem{axioma}{Axioma}[section]
+\newtheorem{exem}{Exemplo}
+\newtheorem{xdefinicao}{Defini\c{c}\~ao}[section]
+\newtheorem{cdefinicao}{Defini\c{c}\~ao}[chapter]
+\newtheorem{propriedade}{Propriedade}[chapter]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%             Questoes                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Contar as questoes
+\newcounter{quest}
+
+\newenvironment{questao}{ %
+	\begin{list}{\textbf{Quest\~ao \arabic{quest}.}}{\usecounter{quest} %
+			\setlength{\labelwidth}{-2mm} \setlength{\parsep}{0mm} %
+			\setlength{\topsep}{0mm} \setlength{\leftmargin}{0mm}} %
+		\renewcommand{\labelenumi}{(\alph{enumi})}	%
+	}{ %
+	\end{list} %
+} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%             Algoritmo               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Por algum motivo, o algorithm2e estava pegando algumas palavras do espanhol.
+% Acredito que seja porque os comandos \para seja idêntico nos dois idiomas.
+% Esses comando resolvem o problema
+\SetKwFor{Para}{para}{fa\c{c}a}{fim para}
+\SetKwBlock{Inicio}{inicio}{fim}
+
+% Na versao mais nova do algorithm2e (versao 5.1) aparentemente foram adicionados
+% algumas palavras com acentuacao e por isso estava causando erro no template. 
+% Os comandos a seguir foram copiados da versao mais nova para tentar resolver o problema.
+\SetKwInput{Entrada}{Entrada}%
+\SetKwInput{Saida}{Sa\'{i}da}%
+\SetKwInput{Dados}{Dados}%
+\SetKwInput{Resultado}{Resultado}%
+\SetKw{Ate}{at\'{e}}
+\SetKw{KwRetorna}{retorna}%
+\SetKw{Retorna}{retorna}%
+\SetKwBlock{Inicio}{in\'{i}cio}{fim}%
+\SetKwRepeat{Repita}{repita}{at\'{e}}%
+%
+\SetKwIF{Se}{SenaoSe}{Senao}{se}{ent\~{a}o}{sen\~{a}o se}{sen\~{a}o}{fim se}%
+\SetKwSwitch{Selec}{Caso}{Outro}{selecione}{fa\c{c}a}{caso}{sen\~{a}o}{fim caso}{fim selec}%
+\SetKwFor{Para}{para}{fa\c{c}a}{fim para}%
+\SetKwFor{ParaPar}{para}{fa\c{c}a em paralelo}{fim para}
+\SetKwFor{ParaCada}{para cada}{fa\c{c}a}{fim para cada}%
+\SetKwFor{ParaTodo}{para todo}{fa\c{c}a}{fim para todo}%
+\SetKwFor{Enqto}{enquanto}{fa\c{c}a}{fim enqto}%
+
+% Espaco entre as linhas do algoritmo
+\newcommand{\SetSpacedAlgorithm}{
+	\linespread{1.35}\selectfont
+}
+
+% Altera o titulo para esse
+\renewcommand{\listalgorithmcfname}{Lista de Algoritmos}%
