@@ -1,5 +1,4 @@
 *.kilepr
-*.sh
 *.aux
 *.acn
 *.acr
@@ -51,3 +50,4 @@ documento.pdf
 *.loplanta
 *.loquadro
 *.loretrato
+.DS_Store
