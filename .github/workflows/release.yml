@@ -17,7 +17,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "<CURRENT_DATE> <VERSION>"
+          find: "CURRENT_DATE>"
           replace: "2025-01-01 v1.0.9"
           include: "tex/latex/uecetex2/uecetex2.cls" # Will match all README.md files in any nested directory
 
