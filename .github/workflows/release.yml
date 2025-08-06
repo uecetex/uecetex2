@@ -16,9 +16,9 @@ jobs:
 
       - name: Update Version
         run: |
-            find="\<CURRENT_DATE\>"
+            input=tex/latex/uecetex2/uecetex2.cls
             replace="2025-01-01"
-            sed -i "s/$find/$replace/" tex/latex/uecetex2/uecetex2.cls
+            sed -i "s/<CURRENT_DATE>/$replace/" $input
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
