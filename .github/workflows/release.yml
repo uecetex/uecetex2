@@ -14,6 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Update Version
+        run: |
+            DATE=$(date +'%Y/%m/%d')
+            VERSION="v1.2.3"
+            sed -i "s/ProvidesClass{uecetex2}\[.*\]/ProvidesClass{uecetex2}[$DATE VERSION uecetex]/" tex/latex/uecetex2/uecetex2.cls
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
