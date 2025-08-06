@@ -27,7 +27,7 @@ function initialize(){
     # mkdir -p target/abntex2source/
     cp -rf doc tex dist/uecetex2/
 
-
+    cp README.md dist/uecetex2
 }
 
 function install(){
