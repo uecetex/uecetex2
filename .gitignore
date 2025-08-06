@@ -51,3 +51,4 @@ documento.pdf
 *.loquadro
 *.loretrato
 .DS_Store
+dist/
