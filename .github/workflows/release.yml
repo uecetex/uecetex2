@@ -19,11 +19,13 @@ jobs:
         with:
           find: "CURRENT_DATE"
           replace: "2025-01-01"
-          include: "**uecetex2.cls" # Will match all README.md files in any nested directory
+          include: "tex/latex/uecetex2/uecetex2.cls" # Will match all README.md files in any nested directory
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
+          files: |
+            tex/latex/uecetex2/uecetex2.cls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
