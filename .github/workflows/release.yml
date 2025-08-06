@@ -14,11 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Update Version
-        run: |
-            input=tex/latex/uecetex2/uecetex2.cls
-            replace="2025-01-01"
-            sed -i "s/<CURRENT_DATE>/$replace/" $input
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "<CURRENT_DATE>"
+          replace: "2025-01-01"
+          include: "tex/latex/uecetex2/uecetex2.cls" # Will match all README.md files in any nested directory
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
