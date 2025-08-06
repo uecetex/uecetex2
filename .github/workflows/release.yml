@@ -16,7 +16,7 @@ jobs:
 
       - name: Update Version
         run: |
-            DATE=$(date +'%Y/%m/%d')
+            DATE="March"
             VERSION="v1.2.3"
             sed -i "s/ProvidesClass{uecetex2}\[.*\]/ProvidesClass{uecetex2}[$DATE VERSION uecetex]/" tex/latex/uecetex2/uecetex2.cls
 
