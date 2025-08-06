@@ -73,7 +73,9 @@ function replaceVariable(){
 }
 
 function removeTempFiles(){
-    # Delete everything except the following
+
+    # Deletes all files in 'dist' except .tex and .pdf
+
     find dist/uecetex2/doc -type f ! \( -name '*.tex' -o -name '*.pdf' -o -name 'README' \) -delete
 }
 
