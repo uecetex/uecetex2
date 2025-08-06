@@ -16,7 +16,7 @@ jobs:
 
       - name: Update Version
         run: |
-            find="<CURRENT_DATE>"
+            find="\<CURRENT_DATE\>"
             replace="2025-01-01"
             sed -i "s/$find/$replace/" tex/latex/uecetex2/uecetex2.cls
 
