@@ -8,11 +8,14 @@
 \usepackage[utf8]{inputenc}
 % Enable hyperlinks in the document
 \usepackage{hyperref}
+% Enable syntax highlighting source code
+\usepackage{minted}
 
 % ===========================
 % Settings
 % ===========================
 
+% Settings for the 'hyperref' package
 \hypersetup{
     pdftitle={A classe uecetex2},
     pdfauthor={Thiago Ferreira},
@@ -26,22 +29,50 @@
     urlcolor=blue
 }
 
-\title{The uece\TeX2 Class}
+% Settings for the 'minted' package
+\setminted{
+    linenos,
+    frame=single,
+    fontsize=\footnotesize,
+}
+
+% ===========================
+% Document Information
+% ===========================
+
+\title{The \textsf{uecetex2} Class}
 
 \author{Thiago Ferreira}
 
-\date{\today, <VERSION>}
+\date{<CURRENT_DATE>, <VERSION>}
+
+% ===========================
+% Main Document
+% ===========================
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-    This is an abstract
+    This is an abstract teste
 \end{abstract}
 
 \tableofcontents
 
 \section{Considerações iniciais}
+
+\DescribeMacro{\documentclass}
+A classe \textsf{abntex2} foi criada como um conjunto de configurações da classe
+\textsf{memoir}\footnote{A versão anterior do ~era baseada na classe
+\textsf{report}.} \cite{memoir}. Desse modo, todas as opções do \textsf{memoir}
+estão disponíveis, como por exemplo, |12pt,openright,twoside,a4paper,article|.
+Consulte o manual do \textsf{memoir} para outras opções.
+
+As opções mais comuns de inicialização do texto do documento são:
+
+\begin{minted}{latex}
+\documentclass[]{uecetex2}
+\end{minted}
 
 \end{document}
