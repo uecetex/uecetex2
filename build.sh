@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# If latexmk fails, the script will stop executing
+set -e
+
 echo -----------------------------------------------------
 echo ueceTeX2 BUILDER SCRIPT
 echo https://github.com/uecetex
