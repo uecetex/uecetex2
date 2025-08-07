@@ -111,13 +111,15 @@ function remove_latex_temp_files(){
 
 function zip_to_ctan(){
 
+    local version="$1"
+
     echo -----------------------------------------------------
     echo Zipping to CTAN
     echo -----------------------------------------------------
 
     cd dist
 
-    zip -vr uecetex2.zip uecetex2 -x "*.DS_Store"
+    zip -vr "uecetex2-$version.zip" uecetex2 -x "*.DS_Store"
 }
 
 function main(){
@@ -135,7 +137,7 @@ function main(){
 
     remove_latex_temp_files
 
-    zip_to_ctan
+    zip_to_ctan $version
 
     echo -----------------------------------------------------
     echo Done
