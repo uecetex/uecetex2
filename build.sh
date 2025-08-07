@@ -5,7 +5,6 @@ echo ueceTeX2 BUILDER SCRIPT
 echo https://github.com/uecetex
 echo -----------------------------------------------------
 
-VERSION=v1.0.1
 CURRENT_DATE=`date +'%Y-%m-%d'`
 
 function compile_latex(){
@@ -123,9 +122,11 @@ function zip_to_ctan(){
 
 function main(){
 
+    local version="$1"
+
     initialize
 
-    replace_variable "<VERSION>" $VERSION
+    replace_variable "<VERSION>" $version
     replace_variable "<CURRENT_DATE>" $CURRENT_DATE
 
     install
@@ -135,10 +136,15 @@ function main(){
     remove_latex_temp_files
 
     zip_to_ctan
+
+    echo -----------------------------------------------------
+    echo Done
+    echo -----------------------------------------------------
 }
 
-main
+# Set default value for $1 if not provided
+if [ -z "$1" ]; then
+    set -- "v1.0.0-snapshot"
+fi
 
-echo -----------------------------------------------------
-echo Done
-echo -----------------------------------------------------
+main $1
