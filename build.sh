@@ -16,7 +16,7 @@ function compile_latex(){
 
     echo "Compiling $texFile"
 
-    latexmk -pdf -halt-on-error -time -output-directory="$dir" $base
+    latexmk -pdf -halt-on-error -time -shell-escape -output-directory="$dir" $base
 }
 
 function initialize(){
