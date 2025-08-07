@@ -28,8 +28,8 @@ function initialize(){
     echo Initializing
     echo -----------------------------------------------------
 
-    # Remove 'dist' folder and all its content if it exists
-    rm -rf dist
+    # Remove all the content in 'dist' folder
+    rm -rf dist/*
 
     # Create directories for CTAN zip
     mkdir -p dist/uecetex2/{tex,doc}
