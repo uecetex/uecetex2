@@ -7,5 +7,5 @@ Trabalhos Acadêmicos em Latex usando abnTeX2 para Universidade Estadual do Cear
 Please install the following packages before building
 
 ```sh
-sudo tlmgr install latexmk minted hypdoc
+sudo tlmgr install latexmk abntex2 minted hypdoc
 ```
