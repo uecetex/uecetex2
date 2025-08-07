@@ -52,3 +52,4 @@ documento.pdf
 *.loretrato
 .DS_Store
 dist/
+_minted
