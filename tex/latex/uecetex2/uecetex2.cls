@@ -1,8 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{uecetex2}[<CURRENT_DATE> <VERSION> ueceTeX2]
+\ProvidesClass{uecetex2}[<CURRENT_DATE> <VERSION> uecetex2]
 
-\LoadClass[        
+\LoadClass[
 	a4paper,          % Tamanho da folha A4
 	12pt,             % Tamanho da fonte 12pt
 	chapter=TITLE,    % Todos os capitulos devem ter caixa alta
