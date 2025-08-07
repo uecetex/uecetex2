@@ -17,8 +17,15 @@ jobs:
       - name: Install latexmk
         run: sudo apt-get update && sudo apt-get install -y latexmk
 
+      - name: Install tlmgr
+        run: |
+          sudo apt-get install xzdec
+          tlmgr init-usertree
+          sudo tlmgr update --all
+
       - name: Install Required Latex Packages
-        run: sudo tlmgr install latexmk abntex2 minted hypdoc
+        run: |
+          sudo tlmgr install latexmk abntex2 minted hypdoc
 
       - name: Building the project
         run: |
