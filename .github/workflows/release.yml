@@ -14,26 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install texlive
-        run: |
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-luatex texlive-fonts-recommended texlive-fonts-extra texlive-lang-portuguese texlive-publishers
+      - name: Build docker images
+        run: docker build -t uecetex2 .
 
-      # sudo apt-get update && sudo apt-get install -y latexmk
-
-      # - name: Install tlmgr
-      #   run: |
-      #     sudo apt-get install xzdec
-      #     tlmgr init-usertree
-      #     sudo tlmgr update --all
-
-      # - name: Install Required Latex Packages
-      #   run: |
-      #     sudo tlmgr install latexmk abntex2 minted hypdoc
-
-      - name: Building the project
-        run: |
-          chmod +x build.sh
-          ./build.sh ${{ github.ref_name }}
+      - name: Run tests
+        run: docker run --rm -i -v "$(pwd)/dist:/app/dist" uecetex2 ${{ github.ref_name }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
