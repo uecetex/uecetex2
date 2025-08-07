@@ -16,4 +16,4 @@ jobs:
         run: docker build -t uecetex2 .
 
       - name: Run tests
-        run: docker run --rm -it -v "$(pwd)/dist:/app/dist" uecetex2 v1.0.0-snapshot
+        run: docker run --rm -i -v "$(pwd)/dist:/app/dist" uecetex2 v1.0.0-snapshot
