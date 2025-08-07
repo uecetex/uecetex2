@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo -----------------------------------------------------
+echo ueceTeX2 BUILDER SCRIPT
+echo https://github.com/uecetex
+echo -----------------------------------------------------
+
 VERSION=v1.0.1
 CURRENT_DATE=`date +'%Y-%m-%d'`
 
@@ -16,6 +21,10 @@ function compile_latex(){
 }
 
 function initialize(){
+
+    echo -----------------------------------------------------
+    echo Initializing
+    echo -----------------------------------------------------
 
     # Remove 'dist' folder and all its content if it exists
     rm -rf dist
@@ -38,6 +47,11 @@ function is_macos() {
 }
 
 function install(){
+
+    echo -----------------------------------------------------
+    echo Installing locally
+    echo -----------------------------------------------------
+
     if is_macos; then
         mkdir -p ~/Library/texmf/tex/latex/uecetex2
         cp dist/uecetex2/tex/latex/uecetex2/* ~/Library/texmf/tex/latex/uecetex2/
@@ -49,7 +63,9 @@ function install(){
 
 function compiling_documentation(){
 
-    echo "Compiling documentation"
+    echo -----------------------------------------------------
+    echo Compiling documentation
+    echo -----------------------------------------------------
 
     find dist \( -name "*.tex" \) | while read -r file; do
        compile_latex "$file"
@@ -81,14 +97,24 @@ function replace_variable(){
 
 function remove_latex_temp_files(){
 
+    echo -----------------------------------------------------
+    echo Removing latex temporary files
+    echo -----------------------------------------------------
+
     # Deletes all files in 'dist' except .tex and .pdf
 
     find dist/uecetex2/doc -type f ! \( -name '*.tex' -o -name '*.pdf' -o -name 'README' \) -delete
+
+    # Removing files from _minted folder.
 
     find . -type d -name "_minted*" -exec rm -rf {} +
 }
 
 function zip_to_ctan(){
+
+    echo -----------------------------------------------------
+    echo Zipping to CTAN
+    echo -----------------------------------------------------
 
     cd dist
 
@@ -112,3 +138,7 @@ function main(){
 }
 
 main
+
+echo -----------------------------------------------------
+echo Done
+echo -----------------------------------------------------
