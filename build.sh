@@ -49,10 +49,10 @@ function install(){
 
 function compiling_documentation(){
 
-    echo "Compiling examples"
+    echo "Compiling documentation"
 
-    for file in dist/uecetex2/doc/latex/uecetex2/*.tex; do
-        compile_latex "$file"
+    find dist \( -name "*.tex" \) | while read -r file; do
+       compile_latex "$file"
     done
 }
 
@@ -84,6 +84,15 @@ function remove_latex_temp_files(){
     # Deletes all files in 'dist' except .tex and .pdf
 
     find dist/uecetex2/doc -type f ! \( -name '*.tex' -o -name '*.pdf' -o -name 'README' \) -delete
+
+    find . -type d -name "_minted*" -exec rm -rf {} +
+}
+
+function zip_to_ctan(){
+
+    cd dist
+
+    zip -vr uecetex2.zip uecetex2 -x "*.DS_Store"
 }
 
 function main(){
@@ -98,6 +107,8 @@ function main(){
     compiling_documentation
 
     remove_latex_temp_files
+
+    zip_to_ctan
 }
 
 main
