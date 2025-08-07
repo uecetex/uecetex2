@@ -16,7 +16,7 @@ jobs:
 
       - name: Install texlive
         run: |
-          sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-fonts-recommended texlive-fonts-extra texlive-lang-portuguese
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-luatex texlive-fonts-recommended texlive-fonts-extra texlive-lang-portuguese
 
       # sudo apt-get update && sudo apt-get install -y latexmk
 
