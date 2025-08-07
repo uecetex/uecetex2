@@ -1,0 +1,19 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build docker images
+        run: docker build -t uecetex2 .
+
+      - name: Run tests
+        run: docker run --rm -it -v "$(pwd)/dist:/app/dist" uecetex2 v1.0.0-snapshot
